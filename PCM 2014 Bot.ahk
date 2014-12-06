@@ -2,71 +2,71 @@
 
 ;; BUTTONS, COLORS AND POSITIONS
 ; MULTIPLAYER BUTTON
-colorBtnMultiplayer := 0x40CDF6
-posBtnMultiplayerX := 815
-posBtnMultiplayerY := 122
+colorBtnMultiplayer := 0x0EC4F2
+posBtnMultiplayerX := 1780
+posBtnMultiplayerY := 429
 
-; CONNECTION WITH THE SERVER HAS FAILED
+; CONNECTION WITH THE SERVER HAS FAILED -- TODO
 colorBtnConnectionHasFailed := 0x22E6FE
 posBtnConnectionHasFailedX := 1014
 posBtnConnectionHasFailedY := 582
 
 ; YOU WERE DISCONNECTED / PROFILE ALREADY CONNECTED
-colorBtnYouWereDisconnected := 0x22E6FE
-posBtnYouWereDisconnectedX := 1008
-posBtnYouWereDisconnectedY := 567
+colorBtnYouWereDisconnected := 0x003F5C
+posBtnYouWereDisconnectedX := 921
+posBtnYouWereDisconnectedY := 309
 
 ; GAME PORTS/YOU LEFT EARLY BUTTON
-colorBtnGamePorts := 0x22E6FE
-posBtnGamePortsX := 930
-posBtnGamePortsY := 686
+colorBtnGamePorts := 0x5CD9F9
+posBtnGamePortsX := 928
+posBtnGamePortsY := 687
 
 ; STAGE BUTTON
-colorBtnStage := 0x3CB9DD
-posBtnStageX := 531
-posBtnStageY := 127
+colorBtnStage := 0x40CDF6
+posBtnStageX := 602
+posBtnStageY := 170
 
-; PLAY BUTTON
-colorBtnPlay := 0x22E6FE
-posBtnPlayX := 318
-posBtnPlayY := 83
+; PLAY BUTTON -- TODO
+;colorBtnPlay := 0x101010
+posBtnPlayX := 891
+posBtnPlayY := 75
 
 ; LOOK FOR A GAME BUTTON
-colorBtnLookGame := 0x22E6FE
-posBtnLookGameX := 814
-posBtnLookGameY := 185
+colorBtnLookGame := 0x5CD9F9
+posBtnLookGameX := 879
+posBtnLookGameY := 295
 
 ; LOOKING FOR A GAME IN PROGRESS
-colorLookInProgress := 0x3D3D3D
-posLookInProgressX := 948
-posLookInProgressY := 46
+colorLookInProgress := 0xBFBFBF
+posLookInProgressX := 1493
+posLookInProgressY := 13
 
 ; MAIN MENU BUTTON
-colorBtnMainMenu := 0x10CDFC
-posBtnMainMenuX := 1765
-posBtnMainMenuY := 43
+colorBtnMainMenu := 0x0FC4F1
+posBtnMainMenuX := 898
+posBtnMainMenuY := 9
 
 ; QUIT GAME BUTTON
-colorBtnQuitGame := 0x5DDFFE
-posBtnQuitGameX := 1891
-posBtnQuitGameY := 43
+colorBtnQuitGame := 0x0FC4F1
+posBtnQuitGameX := 1014
+posBtnQuitGameY := 11
 
 ; CONFIRM QUIT GAME BUTTON
-colorBtnConfirmQuitGame := 0x22E6FE
-posBtnConfirmQuitGameX := 893
-posBtnConfirmQuitGameY := 569
+colorBtnConfirmQuitGame := 0x5CD9F9
+posBtnConfirmQuitGameX := 1041
+posBtnConfirmQuitGameY := 570
 
 ; CHECK IF INGAME
-colorChkInGame := 0x22E6FE
+colorChkInGame := 0x5CD9F9
 
-posChkInGame1X := 165
-posChkInGame1Y := 82
+posChkInGame1X := 1641
+posChkInGame1Y := 282
 
-posChkInGame2X := 586
-posChkInGame2Y := 82
+posChkInGame2X := 225
+posChkInGame2Y := 1006
 
-posChkInGame3X := 586
-posChkInGame3Y := 1046
+posChkInGame3X := 1629
+posChkInGame3Y := 1010
 
 ; PREVIOUS POINTS IN GAME
 posPreviousPoint1X := 475
@@ -82,24 +82,24 @@ posPreviousPoint4X := 984
 posPreviousPoint4Y := 1006
 
 ; QUIT REPLAY BUTTON (AT REPLAY)
-colorBtnQuitReplay := 0x22E6FE
-posBtnQuitReplayX := 786
-posBtnQuitReplayY := 605
+colorBtnQuitReplay := 0x5CD9F9
+posBtnQuitReplayX := 1078
+posBtnQuitReplayY := 585
 
 ; NEXT BUTTON
-colorBtnNext := 0x07D4FA
-posBtnNextX := 1746
-posBtnNextY := 1048
+colorBtnNext := 0x099DFB
+posBtnNextX := 1802
+posBtnNextY := 1021
 
 ; QUIT BUTTON
-colorBtnQuit := 0x01CCFA
-posBtnQuitX := 1757
-posBtnQuitY := 1052
+colorBtnQuit := 0x099DFB
+posBtnQuitX := 1778
+posBtnQuitY := 1021
 
 ; OK BUTTON (AFTER FINISHING)
-colorBtnOkAfterFinishing := 0x22E6FE
-posBtnOkAfterFinishingX := 848
-posBtnOkAfterFinishingY := 688
+colorBtnOkAfterFinishing := 0x5CD9F9
+posBtnOkAfterFinishingX := 901
+posBtnOkAfterFinishingY := 689
 
 ; GAME ERRORS
 ; TODO
@@ -142,6 +142,20 @@ LogMessage(msg, doLog)
 		FileAppend, %Time% - %msg%`n, PCM 2014 BotLog.txt
 	}
 }
+
+CheckIfInPlayMenu()
+{
+	colorAtChkInGame1 := MoveAndGetColorAt(posChkInGame1X, posChkInGame1Y)
+	colorAtChkInGame2 := MoveAndGetColorAt(posChkInGame2X, posChkInGame2Y)
+	colorAtChkInGame3 := MoveAndGetColorAt(posChkInGame3X, posChkInGame3Y)
+	if ((colorAtChkInGame1 = colorChkInGame) and (colorAtChkInGame2 = colorChkInGame) and (colorAtChkInGame3 = colorChkInGame))
+	{
+		return "true"
+	} else {
+		return "false"
+	}
+}
+
 ;; END OF AUXILIARY FUNCTIONS
 
 ;;;;;;;;;;;;;;;; RUNNING BOT CODE ;;;;;;;;;;;;;;;;
@@ -241,9 +255,14 @@ Loop
 				
 				; Stages menu (outside or inside of play tab), clicking play
 				colorAtPosBtnPlay := MoveAndGetColorAt(posBtnPlayX, posBtnPlayY)	
-				if (colorAtPosBtnPlay = colorBtnPlay)
-				{
+				;if (colorAtPosBtnPlay = colorBtnPlay)
+				;{
 					ClickAndSleep(posBtnPlayX, posBtnPlayY, 5000, "Clicking 'Play'", "false")
+					;Continue
+				;}
+				
+				if (CheckIfInPlayMenu() = "true")
+				{
 					Continue
 				}
 				
@@ -268,10 +287,11 @@ Loop
 				}
 				
 				; Check if not in menu looking for a game
-				colorAtChkInGame1 := MoveAndGetColorAt(posChkInGame1X, posChkInGame1Y)
-				colorAtChkInGame2 := MoveAndGetColorAt(posChkInGame2X, posChkInGame2Y)
-				colorAtChkInGame3 := MoveAndGetColorAt(posChkInGame3X, posChkInGame3Y)
-				if ((colorAtChkInGame1 != colorChkInGame) or (colorAtChkInGame2 != colorChkInGame) or (colorAtChkInGame3 != colorChkInGame))
+				;colorAtChkInGame1 := MoveAndGetColorAt(posChkInGame1X, posChkInGame1Y)
+				;colorAtChkInGame2 := MoveAndGetColorAt(posChkInGame2X, posChkInGame2Y)
+				;colorAtChkInGame3 := MoveAndGetColorAt(posChkInGame3X, posChkInGame3Y)
+				;if ((colorAtChkInGame1 != colorChkInGame) or (colorAtChkInGame2 != colorChkInGame) or (colorAtChkInGame3 != colorChkInGame))
+				if(CheckIfInPlayMenu() = "false")
 				{
 					previousTime := A_Now
 					state := "ingame"

@@ -5,7 +5,6 @@ A bot written in AutoHotkey to automate the playing of successive stages in the 
 
 TODO:
 -------------
-* Update positions and colors to PCM 2014;
 * Fix detection of stage being bugged when it's raining/snowing;
 * Support to multiple screen resolutions;
 * Support to choose game executable location  (through configuration files or through GUI);
